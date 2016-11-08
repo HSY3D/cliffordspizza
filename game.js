@@ -22,6 +22,8 @@ function preload() {
 	game.load.image('sauced', 'assets/sauced.png');
 	game.load.image('finished', 'assets/finished.png');
 	game.load.spritesheet('main_chef', 'assets/dude.png', 32, 48);
+
+	game.load.image('fiveguys','assets/logo.jpg');
 }
 
 function create() {
@@ -75,20 +77,10 @@ function create() {
 
 	cursors = game.input.keyboard.createCursorKeys();
 
-
-	/*station = game.add.group();
-	station.enableBody = true;
-
-	var dough = station.create(0, game.world.top, 'dough');
-	var toppings = station.create(800 - 159, game.world.top, 'toppings')
-	var cheese = station.create(game.world.right - (150), 600-96, 'cheese');
-	var sauce = station.create(0, 600 - 148, 'sauce');
-	var fire = station.create(game.world.centerX - (144 / 2), game.world.centerY - (150 / 2), 'fire');*/
-
-	/*ball = game.add.sprite(game.world.centerX - (96/2), 300, 'ball');
-	game.physics.arcade.enable(ball);
-	ball.body.collideWorldBounds = true;
-	cursors = game.input.keyboard.createCursorKeys();*/
+	logo = game.add.sprite(0, 0, 'fiveguys');
+	logo.fixedToCamera = true;
+	logo.scale.setTo(0.5,0.5);
+	game.input.onDown.add(removeLogo, this);
 }
 
 function update() {
@@ -138,23 +130,29 @@ function interactWithIngredient(player, ingredient) {
 
 function hitDough(player, dough) {
 	if (status == 0) {
-  status = game.add.sprite(700,50, 'spread');
-	dough.kill();
-	status = 1;
-}
+		status = game.add.sprite(700,50, 'spread');
+		dough.kill();
+		status = 1;
+	}
 }
 
 function hitSauce(player, sauce) {
 	if (status == 1) {
-  status = game.add.sprite(700,50, 'sauced');
-	sauce.kill();
-	status = 2;
-}
+		status = game.add.sprite(700,50, 'sauced');
+		sauce.kill();
+		status = 2;
+	}
 }
 
 function hitCheese(player, cheese) {
 	if (status == 2) {
-  status = game.add.sprite(700,50, 'finished');
-	cheese.kill();
+		status = game.add.sprite(700,50, 'finished');
+		cheese.kill();
+	}
 }
+
+function removeLogo () {
+	game.input.onDown.remove(removeLogo, this);
+	logo.kill();
 }
+
