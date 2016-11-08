@@ -27,27 +27,27 @@ function create() {
 	background.scale.setTo(0.5,0.5);
 
 	//  Finally some stars to collect
-	chefs = game.add.group();
+	ingredients = game.add.group();
 
 	//  We will enable physics for any chef that is created in this group
-	chefs.enableBody = true;
+	ingredients.enableBody = true;
 
-	var chef1 = chefs.create(30, 280, 'chef1');
+	var chef1 = game.add.sprite(30, 280, 'chef1');
 	chef1.scale.setTo(0.1,0.1);
 
-	var cheese = chefs.create(90, 330, 'cheese');
+	var cheese = ingredients.create(90, 330, 'cheese');
 	cheese.scale.setTo(0.3,0.3);
 
-	var chef2 = chefs.create(650, 200, 'chef2');
+	var chef2 = game.add.sprite(650, 200, 'chef2');
 	chef2.scale.setTo(0.1,0.1);
 
-	var dough = chefs.create(610, 250, 'dough');
+	var dough = ingredients.create(610, 250, 'dough');
 	dough.scale.setTo(0.3,0.3);
 
-	var chef3 = chefs.create(650, 360, 'chef3');
+	var chef3 = game.add.sprite(650, 360, 'chef3');
 	chef3.scale.setTo(0.1,0.1);
 
-	var sauce = chefs.create(620, 410, 'sauce');
+	var sauce = ingredients.create(620, 410, 'sauce');
 	sauce.scale.setTo(0.3,0.3);
 
 	// The player and its settings
@@ -91,7 +91,7 @@ function update() {
 	player.body.velocity.y = 0;
 
 	//  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-	game.physics.arcade.overlap(player, chefs, interactWithChef, null, this);
+	game.physics.arcade.overlap(player, ingredients, interactWithIngredient, null, this);
 
 	if (cursors.left.isDown)
 	{
@@ -122,7 +122,7 @@ function update() {
 	}
 }
 
-function interactWithChef(player, chef) {
+function interactWithIngredient(player, ingredient) {
 	// Removes the star from the screen
-	chef.kill();
+	ingredient.kill();
 }
