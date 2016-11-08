@@ -16,6 +16,10 @@ function preload() {
 	game.load.image('chef1', 'assets/chef1.png');
 	game.load.image('chef2', 'assets/chef2.png');
 	game.load.image('chef3', 'assets/chef3.png');
+
+	game.load.image('spread', 'assets/spread.png');
+	game.load.image('sauced', 'assets/sauced.png');
+	game.load.image('finished', 'assets/finished.png');
 	game.load.spritesheet('main_chef', 'assets/dude.png', 32, 48);
 }
 
@@ -35,19 +39,19 @@ function create() {
 	var chef1 = game.add.sprite(650, 200, 'chef1');
 	chef1.scale.setTo(0.1,0.1);
 
-	var dough = ingredients.create(610, 250, 'dough');
+	dough = ingredients.create(610, 250, 'dough');
 	dough.scale.setTo(0.3,0.3);
 
 	var chef2 = game.add.sprite(650, 360, 'chef2');
 	chef2.scale.setTo(0.1,0.1);
 
-	var sauce = ingredients.create(620, 410, 'sauce');
+	sauce = ingredients.create(620, 410, 'sauce');
 	sauce.scale.setTo(0.3,0.3);
 
 	var chef3 = game.add.sprite(30, 280, 'chef3');
 	chef3.scale.setTo(0.1,0.1);
 
-	var cheese = ingredients.create(90, 330, 'cheese');
+	cheese = ingredients.create(90, 330, 'cheese');
 	cheese.scale.setTo(0.3,0.3);
 
 	// The player and its settings
@@ -91,7 +95,10 @@ function update() {
 	player.body.velocity.y = 0;
 
 	//  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-	game.physics.arcade.overlap(player, ingredients, interactWithIngredient, null, this);
+	//game.physics.arcade.overlap(player, ingredients, interactWithIngredient, null, this);
+	game.physics.arcade.overlap(player, dough, hitDough, null, this);
+	game.physics.arcade.overlap(player, sauce, hitSauce, null, this);
+	game.physics.arcade.overlap(player, cheese, hitCheese, null, this);
 
 	if (cursors.left.isDown)
 	{
@@ -125,4 +132,22 @@ function update() {
 function interactWithIngredient(player, ingredient) {
 	// Removes the star from the screen
 	ingredient.kill();
+}
+
+function hitDough(player, dough) {
+	// Removes the star from the screen
+  status = game.add.sprite(700,50, 'spread');
+	dough.kill();
+}
+
+function hitSauce(player, sauce) {
+	// Removes the star from the screen
+  status = game.add.sprite(700,50, 'sauced');
+	sauce.kill();
+}
+
+function hitCheese(player, cheese) {
+	// Removes the star from the screen
+  status = game.add.sprite(700,50, 'finished');
+	cheese.kill();
 }
