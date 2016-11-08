@@ -3,7 +3,9 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'pizza', {
 	create: create,
 	update: update
 });
-var status;
+var status = 0;
+var score = 0;
+var scoreText;
 
 function preload() {
 	game.load.image('dough', 'assets/dough.png');
@@ -27,7 +29,6 @@ function preload() {
 }
 
 function create() {
-	status = 0;
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.stage.backgroundColor = 'rgb(255,255,255)';
 
@@ -75,6 +76,7 @@ function create() {
 	player.animations.add('left', [0, 1, 2, 3], 10, true);
 	player.animations.add('right', [5, 6, 7, 8], 10, true);
 
+  scoreText = game.add.text(200, 50, '0', { fontSize: '24px', fill: '#000' });
 	cursors = game.input.keyboard.createCursorKeys();
 
 	logo = game.add.sprite(0, 0, 'fiveguys');
@@ -148,6 +150,8 @@ function hitCheese(player, cheese) {
 	if (status == 2) {
 		status = game.add.sprite(700,50, 'finished');
 		cheese.kill();
+		score += 1;
+		scoreText.text = score;
 	}
 }
 
@@ -155,4 +159,3 @@ function removeLogo () {
 	game.input.onDown.remove(removeLogo, this);
 	logo.kill();
 }
-
