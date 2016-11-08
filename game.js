@@ -42,23 +42,8 @@ function create() {
 	//  We will enable physics for any chef that is created in this group
 	ingredients.enableBody = true;
 
-	var chef1 = game.add.sprite(650, 200, 'chef1');
-	chef1.scale.setTo(0.1,0.1);
-
-	dough = ingredients.create(610, 250, 'dough');
-	dough.scale.setTo(0.3,0.3);
-
-	var chef2 = game.add.sprite(650, 360, 'chef2');
-	chef2.scale.setTo(0.1,0.1);
-
-	sauce = ingredients.create(620, 410, 'sauce');
-	sauce.scale.setTo(0.3,0.3);
-
-	var chef3 = game.add.sprite(30, 280, 'chef3');
-	chef3.scale.setTo(0.1,0.1);
-
-	cheese = ingredients.create(90, 330, 'cheese');
-	cheese.scale.setTo(0.3,0.3);
+	placeChefs ();
+	placeIncredients ();
 
 	// The player and its settings
 	player = game.add.sprite(32, game.world.height - 150, 'main_chef');
@@ -155,10 +140,37 @@ function hitCheese(player, cheese) {
 		cheese.kill();
 		score += 1;
 		scoreText.text = score;
+		placeIncredients();
+		status = 0;
 	}
 }
 
 function removeLogo () {
 	game.input.onDown.remove(removeLogo, this);
 	logo.kill();
+}
+
+function placeChefs () {
+
+	var chef1 = game.add.sprite(650, 200, 'chef1');
+	chef1.scale.setTo(0.1,0.1);
+
+	var chef2 = game.add.sprite(650, 360, 'chef2');
+	chef2.scale.setTo(0.1,0.1);
+
+	var chef3 = game.add.sprite(30, 280, 'chef3');
+	chef3.scale.setTo(0.1,0.1);
+}
+
+function placeIncredients () {
+
+	dough = ingredients.create(610, 250, 'dough');
+	dough.scale.setTo(0.3,0.3);
+
+	sauce = ingredients.create(620, 410, 'sauce');
+	sauce.scale.setTo(0.3,0.3);
+
+	cheese = ingredients.create(90, 330, 'cheese');
+	cheese.scale.setTo(0.3,0.3);
+
 }
