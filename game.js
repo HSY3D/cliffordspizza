@@ -53,7 +53,7 @@
 			var sauce = station.create(0, 600 - 148, 'sauce');
 			var fire = station.create(game.world.centerX - (144 / 2), game.world.centerY - (150 / 2), 'fire');*/
 
-			ball = game.add.sprite(game.world.centerX - (96/2), game.world.bottom - 81, 'ball');
+			ball = game.add.sprite(game.world.centerX - (96/2), 300, 'ball');
 			game.physics.arcade.enable(ball);
 			ball.body.collideWorldBounds = true;
 			cursors = game.input.keyboard.createCursorKeys();
@@ -73,9 +73,9 @@
 				//  Stand still
 				ball.frame = 4;
 			}
-			if (cursors.up.isDown) {
+			if (cursors.up.isDown && ball.y > 170) {
 				ball.body.velocity.y = -150;
-			} else if (cursors.down.isDown) {
+			} else if (cursors.down.isDown && ball.y < 415) {
 				ball.body.velocity.y = 150;
 			} else {
 				ball.frame = 4;
