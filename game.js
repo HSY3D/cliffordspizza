@@ -32,23 +32,23 @@ function create() {
 	//  We will enable physics for any chef that is created in this group
 	ingredients.enableBody = true;
 
-	var chef1 = game.add.sprite(30, 280, 'chef1');
+	var chef1 = game.add.sprite(650, 200, 'chef1');
 	chef1.scale.setTo(0.1,0.1);
-
-	var cheese = ingredients.create(90, 330, 'cheese');
-	cheese.scale.setTo(0.3,0.3);
-
-	var chef2 = game.add.sprite(650, 200, 'chef2');
-	chef2.scale.setTo(0.1,0.1);
 
 	var dough = ingredients.create(610, 250, 'dough');
 	dough.scale.setTo(0.3,0.3);
 
-	var chef3 = game.add.sprite(650, 360, 'chef3');
-	chef3.scale.setTo(0.1,0.1);
+	var chef2 = game.add.sprite(650, 360, 'chef2');
+	chef2.scale.setTo(0.1,0.1);
 
 	var sauce = ingredients.create(620, 410, 'sauce');
 	sauce.scale.setTo(0.3,0.3);
+
+	var chef3 = game.add.sprite(30, 280, 'chef3');
+	chef3.scale.setTo(0.1,0.1);
+
+	var cheese = ingredients.create(90, 330, 'cheese');
+	cheese.scale.setTo(0.3,0.3);
 
 	// The player and its settings
 	player = game.add.sprite(32, game.world.height - 150, 'main_chef');
