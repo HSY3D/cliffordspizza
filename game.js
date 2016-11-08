@@ -19,27 +19,30 @@ function preload() {
 	game.load.spritesheet('main_chef', 'assets/dude.png', 32, 48);
 }
 
-var player;
-
 function create() {
-	//  We're going to be using physics, so enable the Arcade Physics system
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-
-	//  set up the game background
 	game.stage.backgroundColor = 'rgb(255,255,255)';
+
 	var background = game.add.sprite(0, 0, 'background');
 	background.scale.setTo(0.5,0.5);
 
 	var chef1 = game.add.sprite(30, 280, 'chef1');
 	chef1.scale.setTo(0.1,0.1);
 
+	var cheese = game.add.sprite(90, 330, 'cheese');
+	cheese.scale.setTo(0.3,0.3);
+
 	var chef2 = game.add.sprite(650, 200, 'chef2');
 	chef2.scale.setTo(0.1,0.1);
+
+	var dough = game.add.sprite(610, 250, 'dough');
+	dough.scale.setTo(0.3,0.3);
 
 	var chef3 = game.add.sprite(650, 360, 'chef3');
 	chef3.scale.setTo(0.1,0.1);
 
-
+	var sauce = game.add.sprite(620, 410, 'sauce');
+	sauce.scale.setTo(0.3,0.3);
 
 	// The player and its settings
 	player = game.add.sprite(32, game.world.height - 150, 'main_chef');
@@ -60,6 +63,7 @@ function create() {
 
 	cursors = game.input.keyboard.createCursorKeys();
 
+
 	/*station = game.add.group();
 	station.enableBody = true;
 
@@ -69,15 +73,11 @@ function create() {
 	var sauce = station.create(0, 600 - 148, 'sauce');
 	var fire = station.create(game.world.centerX - (144 / 2), game.world.centerY - (150 / 2), 'fire');*/
 
-	/*ball = game.add.sprite(game.world.centerX - (96/2), game.world.bottom - 81, 'ball');
+	/*ball = game.add.sprite(game.world.centerX - (96/2), 300, 'ball');
 	game.physics.arcade.enable(ball);
 	ball.body.collideWorldBounds = true;
 	cursors = game.input.keyboard.createCursorKeys();*/
-
-	//cursors = game.input.keyboard.createCursorKeys()
 }
-
-//function update() {}
 
 function update() {
 	//  Reset the players velocity (movement)
