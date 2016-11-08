@@ -3,6 +3,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'pizza', {
 	create: create,
 	update: update
 });
+var status;
 
 function preload() {
 	game.load.image('dough', 'assets/dough.png');
@@ -24,6 +25,7 @@ function preload() {
 }
 
 function create() {
+	status = 0;
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.stage.backgroundColor = 'rgb(255,255,255)';
 
@@ -135,19 +137,24 @@ function interactWithIngredient(player, ingredient) {
 }
 
 function hitDough(player, dough) {
-	// Removes the star from the screen
+	if (status == 0) {
   status = game.add.sprite(700,50, 'spread');
 	dough.kill();
+	status = 1;
+}
 }
 
 function hitSauce(player, sauce) {
-	// Removes the star from the screen
+	if (status == 1) {
   status = game.add.sprite(700,50, 'sauced');
 	sauce.kill();
+	status = 2;
+}
 }
 
 function hitCheese(player, cheese) {
-	// Removes the star from the screen
+	if (status == 2) {
   status = game.add.sprite(700,50, 'finished');
 	cheese.kill();
+}
 }
