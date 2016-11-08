@@ -11,20 +11,37 @@
 			game.load.image('toppings', 'assets/toppings.png');
 			game.load.image('fire', 'assets/fire.png');
 			game.load.image('ball', 'assets/ball.png');
+
+			game.load.image('background', 'assets/kitchen.png');
+			game.load.image('chef1', 'assets/chef1.png');
+			game.load.image('chef2', 'assets/chef2.png');
+			game.load.image('chef3', 'assets/chef3.png');
 		}
 
 		function create() {
 			game.physics.startSystem(Phaser.Physics.ARCADE);
 			game.stage.backgroundColor = 'rgb(255,255,255)';
 
-			station = game.add.group();
+			var background = game.add.sprite(0, 0, 'background');
+			background.scale.setTo(0.5,0.5);
+
+			var chef1 = game.add.sprite(30, 280, 'chef1');
+			chef1.scale.setTo(0.1,0.1);
+
+			var chef2 = game.add.sprite(650, 200, 'chef2');
+			chef2.scale.setTo(0.1,0.1);
+
+			var chef3 = game.add.sprite(650, 360, 'chef3');
+			chef3.scale.setTo(0.1,0.1);
+
+			/*station = game.add.group();
 			station.enableBody = true;
 
 			var dough = station.create(0, game.world.top, 'dough');
 			var toppings = station.create(800 - 159, game.world.top, 'toppings')
 			var cheese = station.create(game.world.right - (150), 600-96, 'cheese');
 			var sauce = station.create(0, 600 - 148, 'sauce');
-			var fire = station.create(game.world.centerX - (144 / 2), game.world.centerY - (150 / 2), 'fire');
+			var fire = station.create(game.world.centerX - (144 / 2), game.world.centerY - (150 / 2), 'fire');*/
 
 			ball = game.add.sprite(game.world.centerX - (96/2), game.world.bottom - 81, 'ball');
 			game.physics.arcade.enable(ball);
