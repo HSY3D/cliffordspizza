@@ -28,11 +28,21 @@
 			var chef1 = game.add.sprite(30, 280, 'chef1');
 			chef1.scale.setTo(0.1,0.1);
 
+			var cheese = game.add.sprite(90, 330, 'cheese');
+			cheese.scale.setTo(0.3,0.3);
+
 			var chef2 = game.add.sprite(650, 200, 'chef2');
 			chef2.scale.setTo(0.1,0.1);
 
+			var dough = game.add.sprite(610, 250, 'dough');
+			dough.scale.setTo(0.3,0.3);
+
 			var chef3 = game.add.sprite(650, 360, 'chef3');
 			chef3.scale.setTo(0.1,0.1);
+
+			var sauce = game.add.sprite(620, 410, 'sauce');
+			sauce.scale.setTo(0.3,0.3);
+
 
 			/*station = game.add.group();
 			station.enableBody = true;
