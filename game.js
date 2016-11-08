@@ -107,7 +107,7 @@ function update() {
 
 		player.animations.play('right');
 	}
-	else if (cursors.up.isDown && player.y > 170) {
+	else if (cursors.up.isDown && player.y > 190) {
 		player.body.velocity.y = -150;
 	}
 	else if (cursors.down.isDown && player.y < 415) {
