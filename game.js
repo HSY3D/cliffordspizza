@@ -63,7 +63,7 @@ function create() {
 	ingredients.enableBody = true;
 
 	placeChefs ();
-	placeIncredients ();
+	placeIngredients ();
 
 	// The player and its settings
 	player = game.add.sprite(32, game.world.height - 150, 'main_chef');
@@ -162,7 +162,9 @@ function hitCheese(player, cheese) {
 		cheese.kill();
 		score += 1;
 		scoreText.text = score;
-		showButton();
+		status = 0;
+		placeIngredients();
+		
 	}
 }
 
@@ -174,11 +176,15 @@ function showButton()
 	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2; player.alpha=0.2;
 	player.x = 400;
 	player.y = 300;
+	dough.kill();
+	cheese.kill();
+	sauce.kill();
 }
 
 function removeLogo () {
 	game.input.onDown.remove(removeLogo, this);
 	logo.kill();
+	startTimer();
 }
 
 function placeChefs () {
@@ -193,7 +199,7 @@ function placeChefs () {
 	chef3.scale.setTo(0.1,0.1);
 }
 
-function placeIncredients () {
+function placeIngredients () {
 	//var randInt = getRandomInt(0,2);
 	var randInts = [0,1,2];
 	ingredientsX = [610,620,90];
@@ -203,7 +209,6 @@ function placeIncredients () {
 	placeDough(ingredientsX[randInts[0]],ingredientsY[randInts[0]]);
 	placeSauce(ingredientsX[randInts[1]],ingredientsY[randInts[1]]);
 	placeCheese(ingredientsX[randInts[2]],ingredientsY[randInts[2]]);
-
 
 }
 
@@ -237,9 +242,12 @@ function placeCheese(x,y){
 function actionOnClick () {
     background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
     button.kill();
-    placeIncredients();
+    placeIngredients();
 	status = 0;
 	pizzaState.kill();
+	startTimer();
+	score = 0;
+	scoreText.text = score;
 }
 
 // audio callbacks
@@ -249,4 +257,48 @@ function start() {
 
 	drums.loopFull(0.6);
 	
+}
+
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  //var daysSpan = clock.querySelector('.days');
+  //var hoursSpan = clock.querySelector('.hours');
+  //var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    //daysSpan.innerHTML = t.days;
+    //hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    //minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      showButton();
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+function startTimer(){
+	var deadline = new Date(Date.parse(new Date()) + 30 * 1000);
+	initializeClock('clockdiv', deadline);
 }
