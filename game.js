@@ -3,6 +3,21 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'pizza', {
 	create: create,
 	update: update
 });
+
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Revalia']
+    }
+
+};
+
 status = 0;
 var score = 0;
 var scoreText;
@@ -41,6 +56,9 @@ function preload() {
 	game.load.audio('drums', 'assets/drums.mp3');
 	game.load.audio('synth1', 'assets/synth1.mp3');
 	game.load.audio('beep', 'assets/beep2.mp3');
+
+	//  Load the Google WebFont Loader script
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
 
 function create() {
@@ -183,10 +201,28 @@ function hitCheese(player, cheese) {
 	}
 }
 
+function showScore()
+{
+	var scoreStr = "";
+	if (scoreText.text === 1) 
+	{
+		scoreStr = "YOU MADE " + scoreText.text + " PIZZA!";
+	} else {
+		scoreStr = "YOU MADE " + scoreText.text + " PIZZAS!";
+	}
+	text = game.add.text(400, 250, scoreStr);
+	text.anchor.set(0.5);
+	text.font = 'Revalia';
+    text.fontSize = 60;
+    text.addColor("#b30000", 0);
+
+}
+
 function showButton()
 {
 	//This is all about the play again button
-	button = game.add.button(game.world.centerX - 125, 185, 'playbutton', actionOnClick, this, 2, 1, 0);
+	showScore();
+	button = game.add.button(game.world.centerX - 145, 285, 'playbutton', actionOnClick, this, 2, 1, 0);
 	background.alpha = 0.2;
 	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2; player.alpha=0.2;
 	player.x = 400;
@@ -265,6 +301,7 @@ function actionOnClick () {
 	startTimer();
 	score = 0;
 	scoreText.text = score;
+	text.kill();
 }
 
 // audio callbacks
