@@ -353,6 +353,6 @@ function initializeClock(id, endtime) {
   var timeinterval = setInterval(updateClock, 1000);
 }
 function startTimer(){
-	var deadline = new Date(Date.parse(new Date()) + 6 * 1000);
+	var deadline = new Date(Date.parse(new Date()) + 30 * 1000);
 	initializeClock('clockdiv', deadline);
 }
