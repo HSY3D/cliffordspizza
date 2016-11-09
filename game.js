@@ -82,9 +82,9 @@ function create() {
 	player.animations.add('left', [0, 1, 2, 3], 10, true);
 	player.animations.add('right', [5, 6, 7, 8], 10, true);
 
-	pizzacounter = game.add.sprite(20,30,'pizzacounter');
+	pizzacounter = game.add.sprite(620,50,'pizzacounter');
 	pizzacounter.scale.setTo(0.1,0.1);
-  	scoreText = game.add.text(70, 30, '0', { fontSize: '30px', fill: '#000' });
+  	scoreText = game.add.text(670, 50, '0', { fontSize: '30px', fill: '#000' });
 	cursors = game.input.keyboard.createCursorKeys();
 
 	logo = game.add.sprite(-130, -30, 'fiveguys');
