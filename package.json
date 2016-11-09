@@ -1,0 +1,19 @@
+{
+  "name": "cliffodpizza",
+  "version": "1.0.0",
+  "description": "A game which allows the user to create a pizza but collecting the correct ingredients",
+  "main": "pizza.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HSY3D/cliffordspizza.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HSY3D/cliffordspizza/issues"
+  },
+  "homepage": "https://github.com/HSY3D/cliffordspizza#readme"
+}
