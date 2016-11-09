@@ -163,14 +163,46 @@ function placeChefs () {
 }
 
 function placeIncredients () {
+	//var randInt = getRandomInt(0,2);
+	var randInts = [0,1,2];
+	ingredientsX = [610,620,90];
+	ingredientsY = [250,410,330];
+	shuffle(randInts);
 
-	dough = ingredients.create(610, 250, 'dough');
+	placeDough(ingredientsX[randInts[0]],ingredientsY[randInts[0]]);
+	placeSauce(ingredientsX[randInts[1]],ingredientsY[randInts[1]]);
+	placeCheese(ingredientsX[randInts[2]],ingredientsY[randInts[2]]);
+	
+
+}
+
+// function getRandomInt(min, max) {
+//   min = Math.ceil(min);
+//   max = Math.floor(max);
+//   return Math.floor(Math.random() * (max - min)) + min;
+// }
+function shuffle(array) {
+  var tmp, current, top = array.length;
+  if(top) while(--top) {
+    current = Math.floor(Math.random() * (top + 1));
+    tmp = array[current];
+    array[current] = array[top];
+    array[top] = tmp;
+  }
+  return array;
+}
+
+function placeDough(x,y){
+	dough = ingredients.create(x, y, 'dough');
 	dough.scale.setTo(0.3,0.3);
+}
 
-	sauce = ingredients.create(620, 410, 'sauce');
+function placeSauce(x,y){
+	sauce = ingredients.create(x, y, 'sauce');
 	sauce.scale.setTo(0.3,0.3);
+}
 
-	cheese = ingredients.create(90, 330, 'cheese');
+function placeCheese(x,y){
+	cheese = ingredients.create(x, y, 'cheese');
 	cheese.scale.setTo(0.3,0.3);
-
 }
