@@ -200,7 +200,7 @@ function removeLogo () {
 	game.input.onDown.remove(removeLogo, this);
 	logo.kill();
 	// display timer div
-	document.getElementById("timer").style.display = "inline-block"
+	document.getElementById("timer").style.display = "block";
 	startTimer();
 }
 
