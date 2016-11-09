@@ -213,8 +213,8 @@ function showScore()
 	text = game.add.text(400, 250, scoreStr);
 	text.anchor.set(0.5);
 	text.font = 'Revalia';
-    text.fontSize = 60;
-    text.addColor("#b30000", 0);
+    text.fontSize = 50;
+    text.addColor("#E82C0C", 0);
 
 }
 
@@ -243,13 +243,13 @@ function removeLogo () {
 function placeChefs () {
 
 	chef1 = game.add.sprite(650, 200, 'chef1');
-	chef1.scale.setTo(0.1,0.1);
+	chef1.scale.setTo(0.11,0.11);
 
 	chef2 = game.add.sprite(650, 360, 'chef2');
-	chef2.scale.setTo(0.1,0.1);
+	chef2.scale.setTo(0.11,0.11);
 
 	chef3 = game.add.sprite(30, 280, 'chef3');
-	chef3.scale.setTo(0.1,0.1);
+	chef3.scale.setTo(0.11,0.11);
 }
 
 function placeIngredients () {
