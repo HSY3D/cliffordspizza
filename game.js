@@ -235,9 +235,9 @@ function placeCheese(x,y){
 function actionOnClick () {
     background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
     button.kill();
-    placeIncredients();
     player.x = 400;
 	player.y = 300;
+    placeIncredients();
 	status = 0;
 	pizzaState.kill();
 }
