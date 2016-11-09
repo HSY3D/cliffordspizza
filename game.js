@@ -9,6 +9,7 @@ var scoreText;
 
 var drums;
 var synth1;
+var beep;
 var sounds;
 var loopCount = 0;
 
@@ -39,6 +40,7 @@ function preload() {
 	// sounds
 	game.load.audio('drums', 'assets/drums.mp3');
 	game.load.audio('synth1', 'assets/synth1.mp3');
+	game.load.audio('beep', 'assets/beep2.mp3');
 }
 
 function create() {
@@ -47,6 +49,7 @@ function create() {
 	// set game sounds
 	drums = game.add.audio('drums');
 	synth1 = game.add.audio('synth1');
+	beep = game.add.audio('beep');
 	sounds = [ drums, synth1 ];
 
 	game.sound.setDecodedCallback(sounds, start, this);
@@ -144,25 +147,37 @@ function hitDough(player, dough) {
 		dough.kill();
 		status = 1;
 	}
+	else {
+		beep.play();
+		game.add.tween(dough).to({ y: 300 }, 200, Phaser.Easing.Quadratic.InOut, true, 0, 2, true);
+	}
 }
 
 function hitSauce(player, sauce) {
 	if (status == 1) {
-			pizzaState.kill();
+		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'sauced');
 		sauce.kill();
 		status = 2;
+	}
+	else {
+		beep.play();
+		game.add.tween(sauce).to({ y: 300 }, 200, Phaser.Easing.Quadratic.InOut, true, 0, 2, true);
 	}
 }
 
 function hitCheese(player, cheese) {
 	if (status == 2) {
-			pizzaState.kill();
+		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'finished');
 		cheese.kill();
 		score += 1;
 		scoreText.text = score;
 		showButton();
+	}
+	else {
+		beep.play();
+		game.add.tween(cheese).to({ y: 300 }, 200, Phaser.Easing.Quadratic.InOut, true, 0, 2, true);
 	}
 }
 
@@ -203,8 +218,6 @@ function placeIncredients () {
 	placeDough(ingredientsX[randInts[0]],ingredientsY[randInts[0]]);
 	placeSauce(ingredientsX[randInts[1]],ingredientsY[randInts[1]]);
 	placeCheese(ingredientsX[randInts[2]],ingredientsY[randInts[2]]);
-
-
 }
 
 function shuffle(array) {
@@ -225,6 +238,7 @@ function placeDough(x,y){
 
 function placeSauce(x,y){
 	sauce = ingredients.create(x, y, 'sauce');
+	game.physics.arcade.enable(sauce);
 	sauce.scale.setTo(0.3,0.3);
 }
 
