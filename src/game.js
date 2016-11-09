@@ -13,7 +13,7 @@ WebFontConfig = {
 
     //  The Google Fonts we want to load (specify as many as you like in the array)
     google: {
-      families: ['Revalia']
+    	families: ['Revalia']
     }
 
 };
@@ -29,36 +29,36 @@ var sounds;
 var loopCount = 0;
 
 function preload() {
-	game.load.image('dough', 'assets/dough.png');
-	game.load.image('sauce', 'assets/sauce.png');
-	game.load.image('cheese', 'assets/cheese.png');
-	game.load.image('toppings', 'assets/toppings.png');
-	game.load.image('fire', 'assets/fire.png');
-	game.load.image('ball', 'assets/ball.png');
+	game.load.image('dough', '../assets/dough.png');
+	game.load.image('sauce', '../assets/sauce.png');
+	game.load.image('cheese', '../assets/cheese.png');
+	game.load.image('toppings', '../assets/toppings.png');
+	game.load.image('fire', '../assets/fire.png');
+	game.load.image('ball', '../assets/ball.png');
 
-	game.load.image('background', 'assets/kitchen.png');
-	game.load.image('chef1', 'assets/chef1.png');
-	game.load.image('chef2', 'assets/chef2.png');
-	game.load.image('chef3', 'assets/chef3.png');
+	game.load.image('background', '../assets/kitchen.png');
+	game.load.image('chef1', '../assets/chef1.png');
+	game.load.image('chef2', '../assets/chef2.png');
+	game.load.image('chef3', '../assets/chef3.png');
 
-	game.load.image('spread', 'assets/spread.png');
-	game.load.image('sauced', 'assets/sauced.png');
-	game.load.image('finished', 'assets/finished.png');
-	game.load.spritesheet('main_chef', 'assets/dude.png', 32, 48);
+	game.load.image('spread', '../assets/spread.png');
+	game.load.image('sauced', '../assets/sauced.png');
+	game.load.image('finished', '../assets/finished.png');
+	game.load.spritesheet('main_chef', '../assets/dude.png', 32, 48);
 
-	game.load.image('fiveguys','assets/logo.jpg');
-	game.load.image('pizzacounter', 'assets/pizzacounter.png');
+	game.load.image('fiveguys','../assets/logo.jpg');
+	game.load.image('pizzacounter', '../assets/pizzacounter.png');
 
 	//Play Button Functionality
-	game.load.image('playbutton','assets/keepplaying.png');
+	game.load.image('playbutton','../assets/keepplaying.png');
 
 	// sounds
-	game.load.audio('drums', 'assets/drums.mp3');
-	game.load.audio('synth1', 'assets/synth1.mp3');
-	game.load.audio('beep', 'assets/beep2.mp3');
+	game.load.audio('drums', '../assets/drums.mp3');
+	game.load.audio('synth1', '../assets/synth1.mp3');
+	game.load.audio('beep', '../assets/beep2.mp3');
 
 	//  Load the Google WebFont Loader script
-    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+	game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
 
 function create() {
@@ -105,7 +105,7 @@ function create() {
 
 	pizzacounter = game.add.sprite(620,50,'pizzacounter');
 	pizzacounter.scale.setTo(0.1,0.1);
-  	scoreText = game.add.text(670, 50, '0', { fontSize: '30px', fill: '#000' });
+	scoreText = game.add.text(670, 50, '0', { fontSize: '30px', fill: '#000' });
 	cursors = game.input.keyboard.createCursorKeys();
 
 	logo = game.add.sprite(-130, -30, 'fiveguys');
@@ -160,7 +160,7 @@ function interactWithIngredient(player, ingredient) {
 }
 
 function hitDough(player, dough) {
-	if (status == 0) {
+	if (status === 0) {
 		pizzaState = game.add.sprite(700,50, 'spread');
 		dough.kill();
 		status = 1;
@@ -172,7 +172,7 @@ function hitDough(player, dough) {
 }
 
 function hitSauce(player, sauce) {
-	if (status == 1) {
+	if (status === 1) {
 		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'sauced');
 		sauce.kill();
@@ -185,7 +185,7 @@ function hitSauce(player, sauce) {
 }
 
 function hitCheese(player, cheese) {
-	if (status == 2) {
+	if (status === 2) {
 		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'finished');
 		cheese.kill();
@@ -213,8 +213,8 @@ function showScore()
 	text = game.add.text(400, 250, scoreStr);
 	text.anchor.set(0.5);
 	text.font = 'Revalia';
-    text.fontSize = 50;
-    text.addColor("#E82C0C", 0);
+	text.fontSize = 50;
+	text.addColor("#E82C0C", 0);
 
 }
 
@@ -265,14 +265,14 @@ function placeIngredients () {
 }
 
 function shuffle(array) {
-  var tmp, current, top = array.length;
-  if(top) while(--top) {
-    current = Math.floor(Math.random() * (top + 1));
-    tmp = array[current];
-    array[current] = array[top];
-    array[top] = tmp;
-  }
-  return array;
+	var tmp, current, top = array.length;
+	if(top) while(--top) {
+		current = Math.floor(Math.random() * (top + 1));
+		tmp = array[current];
+		array[current] = array[top];
+		array[top] = tmp;
+	}
+	return array;
 }
 
 function placeDough(x,y){
@@ -293,9 +293,9 @@ function placeCheese(x,y){
 
 //Play Again Button Functionality
 function actionOnClick () {
-    background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
-    button.kill();
-    placeIngredients();
+	background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
+	button.kill();
+	placeIngredients();
 	status = 0;
 	pizzaState.kill();
 	startTimer();
@@ -314,29 +314,29 @@ function start() {
 }
 
 function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
+	var t = Date.parse(endtime) - Date.parse(new Date());
+	var seconds = Math.floor((t / 1000) % 60);
+	var minutes = Math.floor((t / 1000 / 60) % 60);
+	var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+	var days = Math.floor(t / (1000 * 60 * 60 * 24));
+	return {
+		'total': t,
+		'days': days,
+		'hours': hours,
+		'minutes': minutes,
+		'seconds': seconds
+	};
 }
 
 function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
+	var clock = document.getElementById(id);
   //var daysSpan = clock.querySelector('.days');
   //var hoursSpan = clock.querySelector('.hours');
   //var minutesSpan = clock.querySelector('.minutes');
   var secondsSpan = clock.querySelector('.seconds');
 
   function updateClock() {
-    var t = getTimeRemaining(endtime);
+  	var t = getTimeRemaining(endtime);
 
     //daysSpan.innerHTML = t.days;
     //hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
@@ -344,13 +344,13 @@ function initializeClock(id, endtime) {
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
     if (t.total <= 0) {
-      showButton();
-      clearInterval(timeinterval);
+    	showButton();
+    	clearInterval(timeinterval);
     }
-  }
+}
 
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+updateClock();
+var timeinterval = setInterval(updateClock, 1000);
 }
 function startTimer(){
 	var deadline = new Date(Date.parse(new Date()) + 30 * 1000);
