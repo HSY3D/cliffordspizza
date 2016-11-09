@@ -123,7 +123,7 @@ function interactWithIngredient(player, ingredient) {
 
 function hitDough(player, dough) {
 	if (status == 0) {
-		status = game.add.sprite(700,50, 'spread');
+		pizzaState = game.add.sprite(700,50, 'spread');
 		dough.kill();
 		status = 1;
 	}
@@ -131,7 +131,8 @@ function hitDough(player, dough) {
 
 function hitSauce(player, sauce) {
 	if (status == 1) {
-		status = game.add.sprite(700,50, 'sauced');
+			pizzaState.kill();
+		pizzaState = game.add.sprite(700,50, 'sauced');
 		sauce.kill();
 		status = 2;
 	}
@@ -139,7 +140,8 @@ function hitSauce(player, sauce) {
 
 function hitCheese(player, cheese) {
 	if (status == 2) {
-		status = game.add.sprite(700,50, 'finished');
+			pizzaState.kill();
+		pizzaState = game.add.sprite(700,50, 'finished');
 		cheese.kill();
 		score += 1;
 		scoreText.text = score;
@@ -152,7 +154,7 @@ function showButton()
 	//This is all about the play again button
 	button = game.add.button(game.world.centerX - 125, 185, 'playbutton', actionOnClick, this, 2, 1, 0);
 	background.alpha = 0.2;
-	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2;
+	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2; player.alpha=0.2;
 }
 
 function removeLogo () {
@@ -182,7 +184,7 @@ function placeIncredients () {
 	placeDough(ingredientsX[randInts[0]],ingredientsY[randInts[0]]);
 	placeSauce(ingredientsX[randInts[1]],ingredientsY[randInts[1]]);
 	placeCheese(ingredientsX[randInts[2]],ingredientsY[randInts[2]]);
-	
+
 
 }
 
@@ -214,9 +216,11 @@ function placeCheese(x,y){
 
 //Play Again Button Functionality
 function actionOnClick () {
-    background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; 
+    background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
     button.kill();
     placeIncredients();
     player.x = 400;
 	player.y = 300;
+	status = 0;
+	pizzaState.kill();
 }
