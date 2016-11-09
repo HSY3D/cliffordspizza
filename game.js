@@ -7,6 +7,11 @@ status = 0;
 var score = 0;
 var scoreText;
 
+var drums;
+var synth1;
+var sounds;
+var loopCount = 0;
+
 function preload() {
 	game.load.image('dough', 'assets/dough.png');
 	game.load.image('sauce', 'assets/sauce.png');
@@ -30,10 +35,22 @@ function preload() {
 
 	//Play Button Functionality
 	game.load.image('playbutton','assets/keepplaying.png');
+
+	// sounds
+	game.load.audio('drums', 'assets/drums.mp3');
+	game.load.audio('synth1', 'assets/synth1.mp3');
 }
 
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
+
+	// set game sounds
+	drums = game.add.audio('drums');
+	synth1 = game.add.audio('synth1');
+	sounds = [ drums, synth1 ];
+
+	game.sound.setDecodedCallback(sounds, start, this);
+
 	game.stage.backgroundColor = 'rgb(0,0,0)';
 
 	background = game.add.sprite(0, 0, 'background');
@@ -219,4 +236,13 @@ function actionOnClick () {
     placeIncredients();
     player.x = 400;
 	player.y = 300;
+}
+
+// audio callbacks
+function start() {
+
+	sounds.shift();
+
+	drums.loopFull(0.6);
+	
 }
