@@ -3,7 +3,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'pizza', {
 	create: create,
 	update: update
 });
-var status = 0;
+status = 0;
 var score = 0;
 var scoreText;
 
@@ -27,13 +27,16 @@ function preload() {
 
 	game.load.image('fiveguys','assets/logo.jpg');
 	game.load.image('pizzacounter', 'assets/pizzacounter.png');
+
+	//Play Button Functionality
+	game.load.image('playbutton','assets/keepplaying.png');
 }
 
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-	game.stage.backgroundColor = 'rgb(255,255,255)';
+	game.stage.backgroundColor = 'rgb(0,0,0)';
 
-	var background = game.add.sprite(0, 0, 'background');
+	background = game.add.sprite(0, 0, 'background');
 	background.scale.setTo(0.5,0.5);
 
 	//  Finally some stars to collect
@@ -87,22 +90,22 @@ function update() {
 	if (cursors.left.isDown)
 	{
 		//  Move to the left
-		player.body.velocity.x = -150;
+		player.body.velocity.x = -350;
 
 		player.animations.play('left');
 	}
 	else if (cursors.right.isDown)
 	{
 		//  Move to the right
-		player.body.velocity.x = 150;
+		player.body.velocity.x = 350;
 
 		player.animations.play('right');
 	}
 	else if (cursors.up.isDown && player.y > 190) {
-		player.body.velocity.y = -150;
+		player.body.velocity.y = -350;
 	}
 	else if (cursors.down.isDown && player.y < 415) {
-		player.body.velocity.y = 150;
+		player.body.velocity.y = 350;
 	}
 	else
 	{
@@ -140,9 +143,16 @@ function hitCheese(player, cheese) {
 		cheese.kill();
 		score += 1;
 		scoreText.text = score;
-		placeIncredients();
-		status = 0;
+		showButton();
 	}
+}
+
+function showButton()
+{
+	//This is all about the play again button
+	button = game.add.button(game.world.centerX - 125, 185, 'playbutton', actionOnClick, this, 2, 1, 0);
+	background.alpha = 0.2;
+	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2;
 }
 
 function removeLogo () {
@@ -152,13 +162,13 @@ function removeLogo () {
 
 function placeChefs () {
 
-	var chef1 = game.add.sprite(650, 200, 'chef1');
+	chef1 = game.add.sprite(650, 200, 'chef1');
 	chef1.scale.setTo(0.1,0.1);
 
-	var chef2 = game.add.sprite(650, 360, 'chef2');
+	chef2 = game.add.sprite(650, 360, 'chef2');
 	chef2.scale.setTo(0.1,0.1);
 
-	var chef3 = game.add.sprite(30, 280, 'chef3');
+	chef3 = game.add.sprite(30, 280, 'chef3');
 	chef3.scale.setTo(0.1,0.1);
 }
 
@@ -176,11 +186,6 @@ function placeIncredients () {
 
 }
 
-// function getRandomInt(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min)) + min;
-// }
 function shuffle(array) {
   var tmp, current, top = array.length;
   if(top) while(--top) {
@@ -205,4 +210,13 @@ function placeSauce(x,y){
 function placeCheese(x,y){
 	cheese = ingredients.create(x, y, 'cheese');
 	cheese.scale.setTo(0.3,0.3);
+}
+
+//Play Again Button Functionality
+function actionOnClick () {
+    background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; 
+    button.kill();
+    placeIncredients();
+    player.x = 400;
+	player.y = 300;
 }
