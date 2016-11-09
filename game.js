@@ -87,7 +87,7 @@ function create() {
   	scoreText = game.add.text(70, 30, '0', { fontSize: '30px', fill: '#000' });
 	cursors = game.input.keyboard.createCursorKeys();
 
-	logo = game.add.sprite(0, 0, 'fiveguys');
+	logo = game.add.sprite(-130, -30, 'fiveguys');
 	logo.fixedToCamera = true;
 	logo.scale.setTo(0.5,0.5);
 	game.input.onDown.add(removeLogo, this);
@@ -172,6 +172,8 @@ function showButton()
 	button = game.add.button(game.world.centerX - 125, 185, 'playbutton', actionOnClick, this, 2, 1, 0);
 	background.alpha = 0.2;
 	chef1.alpha=0.2; chef2.alpha=0.2; chef3.alpha=0.2; pizzacounter.alpha=0.2; player.alpha=0.2;
+	player.x = 400;
+	player.y = 300;
 }
 
 function removeLogo () {
@@ -236,8 +238,6 @@ function actionOnClick () {
     background.alpha=1; chef1.alpha=1; chef2.alpha=1; chef3.alpha=1; pizzacounter.alpha=1; player.alpha=1;
     button.kill();
     placeIncredients();
-    player.x = 400;
-	player.y = 300;
 	status = 0;
 	pizzaState.kill();
 }
