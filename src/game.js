@@ -160,7 +160,7 @@ function interactWithIngredient(player, ingredient) {
 }
 
 function hitDough(player, dough) {
-	if (status === 0) {
+	if (status == 0) {
 		pizzaState = game.add.sprite(700,50, 'spread');
 		dough.kill();
 		status = 1;
@@ -172,7 +172,7 @@ function hitDough(player, dough) {
 }
 
 function hitSauce(player, sauce) {
-	if (status === 1) {
+	if (status == 1) {
 		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'sauced');
 		sauce.kill();
@@ -185,7 +185,7 @@ function hitSauce(player, sauce) {
 }
 
 function hitCheese(player, cheese) {
-	if (status === 2) {
+	if (status == 2) {
 		pizzaState.kill();
 		pizzaState = game.add.sprite(700,50, 'finished');
 		cheese.kill();
